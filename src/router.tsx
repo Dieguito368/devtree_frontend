@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import AuthLayout from './layouts/AuthLayout';
 import RegisterView from './views/RegisterView';
 import LoginView from './views/LoginView';
@@ -7,9 +8,10 @@ import AppLayout from './layouts/AppLayout';
 import LinkTreeView from './views/LinkTreeView';
 import ProfileView from './views/ProfileView';
 
+import PublicLayout from './layouts/PublicLayout';
 import HandleView from './views/HandleView';
-
 import NotFoundView from './views/NotFoundView';
+
 import HomeView from './views/HomeView';
 
 const Router = () => {
@@ -26,11 +28,11 @@ const Router = () => {
                     <Route path='profile' element={ <ProfileView /> } />
                 </Route>
 
-                <Route path='/:handle' element={ <AuthLayout /> }>
+                <Route path='/:handle' element={ <PublicLayout /> }>
                     <Route index={ true } element={ <HandleView /> } />
                 </Route>
 
-                <Route path='/404' element={ <AuthLayout /> }>
+                <Route path='/404' element={ <PublicLayout /> }>
                     <Route index={ true } element={ <NotFoundView /> } />
                 </Route>
 

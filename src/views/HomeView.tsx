@@ -1,8 +1,23 @@
+import { Navigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import Header from "../components/Header"
 import SearchForm from "../components/SearchForm";
+import Spinner from "../components/Spinner";
+import { getUser } from "../api/DevTreeAPI";
 
 const HomeView = () => {
-    return (
+    const { data: user, isLoading, isError } = useQuery({
+        queryKey: [ 'user' ], 
+        queryFn: getUser,
+        retry: 1,
+        refetchOnWindowFocus: false
+    });
+
+    if(isLoading) return <Spinner />
+
+    if(user) return <Navigate to='/admin' replace={ true } />
+
+    if(isError) return (
         <div className="flex flex-col h-screen animate__animated animate__fadeIn">
             <Header />
             

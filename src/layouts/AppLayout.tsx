@@ -71,7 +71,7 @@ export default function AppLayout() {
 
     if(isLoading) return <Spinner />
 
-    if(isError) return <Navigate to='/auth/login' />
+    if(isError) return <Navigate to='/' />
 
     if(user) return (
         <div className={ animation }>

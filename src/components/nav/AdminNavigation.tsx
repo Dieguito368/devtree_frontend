@@ -7,10 +7,10 @@ const AdminNavigation = () => {
     
     const logout = () => {
         localStorage.removeItem('AUTH_TOKEN');
-
+        
+        queryClient.removeQueries({ queryKey: [ 'user' ]} );
+        
         navigate('/', { replace: true });
-
-        queryClient.invalidateQueries({ queryKey: [ 'user' ]} );
     }
 
     return (
