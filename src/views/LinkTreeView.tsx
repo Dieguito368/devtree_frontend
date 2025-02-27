@@ -52,11 +52,11 @@ const LinkTreeView = () => {
             const id = links.filter(link => link.id > 0).length + 1;
 
             if(itemExists) {
-                updatedItems = links.map(link => link.name === socialNetwork ? { ...link, enabled: true, id } : link);
+                updatedItems = links.map(link => link.name === socialNetwork ? { ...link, enabled: true, id, url: selectSocialNetwork.url } : link);
             }  else {
                 const newtItem = {
                     ...selectSocialNetwork,
-                    id
+                    id,
                 }
 
                 updatedItems = [ ...links, newtItem ];
