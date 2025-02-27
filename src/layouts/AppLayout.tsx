@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, Outlet } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable'
 import { toast, Toaster } from "sonner";
@@ -8,12 +8,15 @@ import Header from "../components/Header";
 import NavigationTabs from "../components/NavigationTabs";
 import DevTreeLink from "../components/DevTreeLink";
 import Spinner from "../components/Spinner";
-import { getUser, updateProfile } from "../api/DevTreeAPI";
+import { updateProfile } from "../api/DevTreeAPI";
 import { SocialNetwork, User } from "../types";
+import { useAuth } from "../hooks/useAuth";
 
 export default function AppLayout() {
     const [ enabledLinks, setEnabledLinks ] = useState<SocialNetwork[]>([]);
     const [ animation, setAnimation ] = useState('animate__animated animate__fadeIn');
+
+    const { user, isLoading, isError } = useAuth();
 
     useEffect(() => {
         setTimeout(() => {
@@ -22,13 +25,6 @@ export default function AppLayout() {
     }, []);
 
     const queryClient = useQueryClient();
-
-    const { data: user, isLoading, isError } = useQuery({
-        queryKey: [ 'user' ], 
-        queryFn: getUser,
-        retry: 1,
-        refetchOnWindowFocus: true
-    });
 
     const { mutate } = useMutation({
         mutationFn: updateProfile,

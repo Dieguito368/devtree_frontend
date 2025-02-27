@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import Spinner from "../components/Spinner";
 import Logo from "../components/Logo";
-import { getUser } from "../api/DevTreeAPI";
+import { useAuth } from "../hooks/useAuth";
 import 'animate.css';
 
 const AuthLayout = () => {
     const [ animation, setAnimation ] = useState('animate__animated animate__fadeIn');
     
-    const { data: user, isLoading, isError } = useQuery({
-        queryKey: [ 'user' ], 
-        queryFn: getUser,
-        retry: 1,
-        refetchOnWindowFocus: true
-    });
+    const { user, isLoading, isError } = useAuth();
 
     useEffect(() => {
         setTimeout(() => {
@@ -43,4 +37,4 @@ const AuthLayout = () => {
     );
 }
 
-export default AuthLayout
+export default AuthLayout;
