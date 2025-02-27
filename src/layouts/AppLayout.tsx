@@ -4,12 +4,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy, arrayMove } from '@dnd-kit/sortable'
 import { toast, Toaster } from "sonner";
+import Header from "../components/Header";
 import NavigationTabs from "../components/NavigationTabs";
 import DevTreeLink from "../components/DevTreeLink";
 import Spinner from "../components/Spinner";
 import { getUser, updateProfile } from "../api/DevTreeAPI";
 import { SocialNetwork, User } from "../types";
-import Header from "../components/Header";
 
 export default function AppLayout() {
     const [ enabledLinks, setEnabledLinks ] = useState<SocialNetwork[]>([]);
